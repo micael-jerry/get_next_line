@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:16:54 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/24 22:05:28 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/24 22:32:11 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*get_stash(char *buffer)
 	int	i;
 	char	*return_val;
 
-	str = ft_strchr(buffer, '\n');
+	str = ft_strchr(buffer, '\n') + 1;
 	i = 0;
 	return_val = ft_calloc(ft_strlen(str, '\0') + 1, sizeof(char));
 	if (!return_val)
@@ -67,20 +67,22 @@ static char	*get_stash(char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*stash = "";
 	char		*buffer;
-	char	*line;
+	char		*line;
 
-	while (!(ft_strchr(buffer, '\n')))
+	while (1 == 1)
 	{
 		buffer = buffer_read(fd);
 		if (!buffer)
 			return (NULL);
+		if (ft_strchr(buffer, '\n'))
+			break;
 		stash = ft_strjoin(stash, buffer, '\0');
 	}
 	line = ft_strjoin(stash, buffer, '\n');
-	free(stash);
+	stash = NULL;
 	stash = get_stash(buffer);
 	free(buffer);
-	return (stash);
+	return (line);
 }

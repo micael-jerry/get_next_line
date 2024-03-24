@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 16:24:52 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/24 21:09:49 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/24 22:14:32 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,18 @@ int	main(void)
 
 	count = 0;
 	fd = open("test.txt", O_RDONLY);
-	get_next_line(fd);
-	// while (1)
-	// {
-	// 	line = get_next_line(fd);
-	// 	if (line == NULL)
-	// 		break ;
-	// 	count++;
-	// 	printf("[%d]:%s\n", count, line);
-	// 	free(line);
-	// 	line = NULL;
-	// }
+	// line = get_next_line(fd);
+	// printf("[%d]:%s\n", count, line);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		count++;
+		printf("[%d]:%s\n", count, line);
+		free(line);
+		line = NULL;
+	}
 	close(fd);
 	return (0);
 }
