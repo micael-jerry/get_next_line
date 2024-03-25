@@ -6,23 +6,19 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:17:19 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/24 21:49:56 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/25 07:25:53 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str, char last_chr)
+size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
 	i = 0;
 	while (str[i] != '\0')
-	{
 		i++;
-		if (str[i] == last_chr)
-			break;
-	}
 	return (i);
 }
 
@@ -31,7 +27,7 @@ char	*ft_strchr(const char *str, int c)
 	size_t	len;
 	size_t	i;
 
-	len = ft_strlen(str, '\0');
+	len = ft_strlen(str);
 	i = 0;
 	while (i <= len)
 	{
@@ -59,13 +55,13 @@ void	*ft_calloc(size_t count, size_t size)
 	return (mem);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2, char last_chr)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
 	int		i;
 	int		j;
 
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1, '\0') + ft_strlen(s2, '\n') + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (str == NULL)
 		return (NULL);
 	i = 0;
@@ -81,8 +77,6 @@ char	*ft_strjoin(char const *s1, char const *s2, char last_chr)
 	{
 		str[i] = s2[j];
 		i++;
-		if (s2[j] == last_chr)
-			break;
 		j++;
 	}
 	str[i] = '\0';

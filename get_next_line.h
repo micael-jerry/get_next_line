@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:16:13 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/24 21:51:27 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/25 07:24:45 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-size_t	ft_strlen(const char *str, char last_chr);
+size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int c);
 void	*ft_calloc(size_t count, size_t size);
-char	*ft_strjoin(char const *s1, char const *s2, char last_chr);
+char	*ft_strjoin(char const *s1, char const *s2);
 char	*get_next_line(int fd);
 
 #endif
