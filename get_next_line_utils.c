@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:17:19 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/26 21:24:40 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:58:47 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 
 	if (!s1)
 		s1 = ft_strdup("");
-	str = (char *) ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	str = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;

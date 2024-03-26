@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:16:54 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/26 21:45:15 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/26 22:18:26 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static size_t	find_next_line_break(char *str, size_t i)
 	return (ptr - str);
 }
 
-static char *get_line(char *stash)
+static char	*get_line(char *stash)
 {
 	char	*line;
 	size_t	i;
@@ -83,7 +83,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer_readed = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	buffer_readed = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (buffer_readed == NULL)
 		return (NULL);
 	bytes_readed = 1;
@@ -92,10 +92,10 @@ char	*get_next_line(int fd)
 		bytes_readed = read(fd, buffer_readed, BUFFER_SIZE);
 		if (bytes_readed == -1)
 		{
-			free(buffer_readed);
-			stash = (free(stash), NULL);
-            return (NULL);
+			stash = (free(buffer_readed), free(stash), NULL);
+			return (NULL);
 		}
+		buffer_readed[bytes_readed] = '\0';
 		stash = ft_strjoin(stash, buffer_readed);
 	}
 	free(buffer_readed);

@@ -6,18 +6,16 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:16:13 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/25 08:57:29 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:59:41 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# include <unistd.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
 # include <fcntl.h>
-# include <limits.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
