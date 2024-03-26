@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:16:54 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/25 09:10:57 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/26 06:40:45 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,40 +50,29 @@ static char *get_line(char *stash)
 	*(line + i) = '\0';
 	return (line);
 }
-static char	*get_stash(char *buffer)
-{
-	char	*new_buffer;
-	size_t	i;
-	size_t	j;
 
-	i = 0;
-	j = 0;
-	if (!*buffer)
-		return (free(buffer), NULL);
-	i = find_next_line_break(buffer, i);
-	new_buffer = (char *)malloc((ft_strlen(buffer) - i) + 1);
-	if (!new_buffer)
-		return (free(new_buffer), NULL);
-	while (*(buffer + i))
-		*(new_buffer + j++) = *(buffer + i++);
-	*(new_buffer + j) = '\0';
-	if (!*new_buffer)
-		return (free(buffer), free(new_buffer), NULL);
-	free(buffer);
-	return (new_buffer);
+static char	*get_stash(char *stash)
+{
+	char    *new_stash;
+
+	if (!stash || stash[0] == '\0')
+		return (NULL);
+	new_stash = ft_strchr(stash, '\n');
+	if (!new_stash)
+		return (NULL);
+	return (ft_strdup(new_stash + 1));
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stash = NULL;
+	static char	*stash = "";
 	char		*buffer_readed;
 	int			bytes_readed;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	printf("\nReading\n");
-	buffer_readed = (char *) ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	buffer_readed = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (buffer_readed == NULL)
 		return (NULL);
 	bytes_readed = 1;
@@ -94,6 +83,7 @@ char	*get_next_line(int fd)
 		{
 			free(buffer_readed);
 			free(stash);
+			stash = NULL;
             return (NULL);
 		}
 		stash = ft_strjoin(stash, buffer_readed);
@@ -101,5 +91,7 @@ char	*get_next_line(int fd)
 	free(buffer_readed);
 	line = get_line(stash);
 	stash = get_stash(stash);
+	if (!stash)
+		stash = "";
 	return (line);
 }
