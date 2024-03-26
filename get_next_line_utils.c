@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:17:19 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/25 08:58:48 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:24:40 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ size_t	ft_strlen(const char *str)
 
 char	*ft_strchr(const char *str, int c)
 {
-	size_t	len;
 	size_t	i;
+	size_t	len;
 
-	len = ft_strlen(str);
+	if (!str)
+		return (NULL);
 	i = 0;
+	len = ft_strlen(str);
 	while (i <= len)
 	{
 		if ((int)str[i] == c)
@@ -84,24 +86,18 @@ char	*ft_strjoin(char *s1, char const *s2)
 	int		i;
 	int		j;
 
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (str == NULL)
+	if (!s1)
+		s1 = ft_strdup("");
+	str = (char *) ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	if (!str)
 		return (NULL);
 	i = 0;
 	j = 0;
 	while (s1[j] != '\0')
-	{
-		str[i] = s1[j];
-		i++;
-		j++;
-	}
+		str[i++] = s1[j++];
+	free(s1);
 	j = 0;
 	while (s2[j] != '\0')
-	{
-		str[i] = s2[j];
-		i++;
-		j++;
-	}
-	str[i] = '\0';
+		str[i++] = s2[j++];
 	return (str);
 }

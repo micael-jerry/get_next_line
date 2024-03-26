@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:16:54 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/26 06:40:45 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:45:15 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,30 @@ static char *get_line(char *stash)
 
 static char	*get_stash(char *stash)
 {
-	char    *new_stash;
+	char	*new_stash;
+	size_t	i;
+	size_t	j;
 
-	if (!stash || stash[0] == '\0')
-		return (NULL);
-	new_stash = ft_strchr(stash, '\n');
+	i = 0;
+	j = 0;
+	if (!stash[0])
+		return (free(stash), NULL);
+	i = find_next_line_break(stash, i);
+	new_stash = (char *)malloc((ft_strlen(stash) - i) + 1);
 	if (!new_stash)
-		return (NULL);
-	return (ft_strdup(new_stash + 1));
+		return (free(new_stash), NULL);
+	while (*(stash + i))
+		*(new_stash + j++) = *(stash + i++);
+	*(new_stash + j) = '\0';
+	if (!*new_stash)
+		return (free(stash), free(new_stash), NULL);
+	free(stash);
+	return (new_stash);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stash = "";
+	static char	*stash;
 	char		*buffer_readed;
 	int			bytes_readed;
 	char		*line;
@@ -82,8 +93,7 @@ char	*get_next_line(int fd)
 		if (bytes_readed == -1)
 		{
 			free(buffer_readed);
-			free(stash);
-			stash = NULL;
+			stash = (free(stash), NULL);
             return (NULL);
 		}
 		stash = ft_strjoin(stash, buffer_readed);
@@ -91,7 +101,5 @@ char	*get_next_line(int fd)
 	free(buffer_readed);
 	line = get_line(stash);
 	stash = get_stash(stash);
-	if (!stash)
-		stash = "";
 	return (line);
 }
