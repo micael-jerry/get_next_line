@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:17:19 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/26 21:58:47 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/28 10:39:06 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,24 @@ void	*ft_calloc(size_t count, size_t size)
 	return (mem);
 }
 
-char	*ft_strcpy(char *dest, const char *src)
-{
-	char	*dest_start;
-
-	dest_start = dest;
-	while (*src)
-		*dest++ = *src++;
-	*dest = '\0';
-	return (dest_start);
-}
-
 char	*ft_strdup(const char *src)
 {
 	size_t	len;
 	char	*dest;
+	size_t	i;
 
-	len = ft_strlen(src);
+	len = ft_strlen(src);	
 	dest = (char *)malloc(sizeof(char) * (len + 1));
 	if (!dest)
 		return (NULL);
-	return (ft_strcpy(dest, src));
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
 char	*ft_strjoin(char *s1, char const *s2)
