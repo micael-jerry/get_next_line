@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:16:13 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/26 21:59:41 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/03/30 19:26:18 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strchr(char const *str, int c);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strdup(char const *src);
 void	*ft_calloc(size_t count, size_t size);
-char	*ft_strjoin(char *s1, const char *s2);
+char	*strjoin_free(char *s1, const char *s2);
 char	*get_next_line(int fd);
 
 #endif

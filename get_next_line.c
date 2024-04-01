@@ -5,101 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 14:16:54 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/26 22:18:26 by mfidimal         ###   ########.fr       */
+/*   Created: 2024/03/30 19:12:22 by mfidimal          #+#    #+#             */
+/*   Updated: 2024/04/01 19:14:33 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static size_t	find_next_line_break(char *str, size_t i)
+typedef struct ft_read_s
 {
-	char	*ptr;
+	int bytes_readed;
+	char *buf;
+} ft_read_t;
 
-	ptr = str + i;
-	while (*ptr && *ptr != '\n')
-		ptr++;
-	if (*ptr == '\n')
-		ptr++;
-	return (ptr - str);
-}
-
-static char	*get_line(char *stash)
+ft_read_t	ft_read(int fd)
 {
-	char	*line;
-	size_t	i;
+	ft_read_t read_value;
 
-	i = 0;
-	if (!stash || *stash == '\0')
-		return (NULL);
-	i = find_next_line_break(stash, i);
-	line = (char *)malloc(sizeof(char) * i + 1);
-	if (!line)
-		return (NULL);
-	i = 0;
-	while (*(stash + i) && *(stash + i) != '\n')
+	read_value.buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!read_value.buf)
 	{
-		*(line + i) = *(stash + i);
-		i++;
+		read_value.buf = NULL;
+		read_value.bytes_readed = -1;
+		return (read_value);
 	}
-	if (*(stash + i) == '\n')
+	read_value.bytes_readed = read(fd, read_value.buf, BUFFER_SIZE);
+	if (read_value.bytes_readed == -1)
 	{
-		*(line + i) = *(stash + i);
-		i++;
+		read_value.buf = NULL;
+		read_value.bytes_readed = -1;
+		return (read_value);
 	}
-	*(line + i) = '\0';
-	return (line);
-}
-
-static char	*get_stash(char *stash)
-{
-	char	*new_stash;
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	if (!stash[0])
-		return (free(stash), NULL);
-	i = find_next_line_break(stash, i);
-	new_stash = (char *)malloc((ft_strlen(stash) - i) + 1);
-	if (!new_stash)
-		return (free(new_stash), NULL);
-	while (*(stash + i))
-		*(new_stash + j++) = *(stash + i++);
-	*(new_stash + j) = '\0';
-	if (!*new_stash)
-		return (free(stash), free(new_stash), NULL);
-	free(stash);
-	return (new_stash);
+	read_value.buf[read_value.bytes_readed] = '\0';
+	return read_value;
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*stash;
-	char		*buffer_readed;
-	int			bytes_readed;
-	char		*line;
+	ft_read_t	read_value;
+	char	*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer_readed = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (buffer_readed == NULL)
-		return (NULL);
-	bytes_readed = 1;
-	while (!ft_strchr(stash, '\n') && bytes_readed != 0)
+	read_value.bytes_readed = 1;
+	while (!ft_strchr(stash, '\n') && read_value.bytes_readed != 0)
 	{
-		bytes_readed = read(fd, buffer_readed, BUFFER_SIZE);
-		if (bytes_readed == -1)
+		read_value = ft_read(fd);
+		if (read_value.bytes_readed == -1)
 		{
-			stash = (free(buffer_readed), free(stash), NULL);
-			return (NULL);
+			free(read_value.buf);
+			free(stash);
+            stash = NULL;
+            return (NULL);
 		}
-		buffer_readed[bytes_readed] = '\0';
-		stash = ft_strjoin(stash, buffer_readed);
+		stash = strjoin_free(stash, read_value.buf);
 	}
-	free(buffer_readed);
-	line = get_line(stash);
-	stash = get_stash(stash);
+	free(read_value.buf);
+	line = // line
+	stash = // stash
 	return (line);
 }
