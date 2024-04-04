@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 19:12:22 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/04/04 11:27:15 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/04/04 11:43:25 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*get_line(char *stash)
 	int i;
 	int j;
 
+	if (!stash || stash[0] == '\0')
+		return (NULL);
 	i = 0;
 	while (stash[i] != '\0' && stash[i] != '\n')
 		i++;
