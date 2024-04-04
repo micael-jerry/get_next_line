@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:16:13 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/03/30 19:26:18 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/04/04 11:01:09 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+
+typedef struct ft_read_s
+{
+	int bytes_readed;
+	char *buf;
+} ft_read_t;
 
 size_t	ft_strlen(char const *str);
 char	*ft_strchr(char const *str, int c);
