@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:16:13 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/04/04 11:01:09 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:21:20 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,17 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 
-typedef struct ft_read_s
+typedef struct s_ft_read
 {
-	int bytes_readed;
-	char *buf;
-} ft_read_t;
+	int		bytes_readed;
+	char	*buf;
+}	t_ft_read;
 
 size_t	ft_strlen(char const *str);
 char	*ft_strchr(char const *str, int c);
-char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strdup(char const *src);
 void	*ft_calloc(size_t count, size_t size);
 char	*strjoin_free(char *s1, const char *s2);
