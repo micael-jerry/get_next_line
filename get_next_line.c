@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 19:12:22 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/04/04 12:19:11 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/04/05 12:55:27 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,27 @@
 
 t_ft_read	ft_read(int fd)
 {
+	char	*buf;
 	t_ft_read	read_value;
 
-	read_value.buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!read_value.buf)
+	buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buf)
 	{
+		free(buf);
 		read_value.buf = NULL;
 		read_value.bytes_readed = -1;
 		return (read_value);
 	}
-	read_value.bytes_readed = read(fd, read_value.buf, BUFFER_SIZE);
+	read_value.bytes_readed = read(fd, buf, BUFFER_SIZE);
 	if (read_value.bytes_readed == -1)
 	{
+		free(buf);
 		read_value.buf = NULL;
 		read_value.bytes_readed = -1;
 		return (read_value);
 	}
-	read_value.buf[read_value.bytes_readed] = '\0';
+	buf[read_value.bytes_readed] = '\0';
+	read_value.buf = buf;
 	return (read_value);
 }
 
@@ -51,7 +55,10 @@ char	*get_line(char *stash)
 	j = 0;
 	while (j <= i)
 	{
-		line[j] = stash[j];
+		if (j == i)
+			line[j] = '\n';
+		else
+			line[j] = stash[j];
 		j++;
 	}
 	line[j] = '\0';
