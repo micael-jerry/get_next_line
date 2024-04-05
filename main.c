@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 16:24:52 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/04/04 11:46:14 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/04/05 13:26:53 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(void)
 		if (line == NULL)
 			break ;
 		count++;
-		printf("[%d]:%s\n", count, line);
+		printf("[%d]:%s", count, line);
 		free(line);
 		line = NULL;
 	}
