@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 16:24:52 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/04/05 13:26:53 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/04/10 10:57:48 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(void)
 
 	count = 0;
 	fd = open("test.txt", O_RDONLY);
-	while (1)
+	while (count < 15)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
