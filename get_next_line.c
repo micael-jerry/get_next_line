@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 19:12:22 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/04/12 17:20:40 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:33:31 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static char	*get_global_tmp(char *global_tmp)
 		i++;
 	if (global_tmp[i] == '\0')
 		return (free(global_tmp), NULL);
-	new_global_tmp = (char *)malloc(sizeof(char) * (ft_strlen(global_tmp) - i + 1));
+	new_global_tmp = (char *)malloc(sizeof(char) * (ft_strlen(global_tmp) - i
+				+ 1));
 	if (!new_global_tmp)
 		return (NULL);
 	i++;
