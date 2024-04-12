@@ -6,11 +6,12 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 16:24:52 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/04/10 10:57:48 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:15:32 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 int	main(void)
 {

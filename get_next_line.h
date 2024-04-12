@@ -6,13 +6,12 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:16:13 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/04/04 12:21:20 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:15:21 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -20,12 +19,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
-
-typedef struct s_ft_read
-{
-	int		bytes_readed;
-	char	*buf;
-}	t_ft_read;
 
 size_t	ft_strlen(char const *str);
 char	*ft_strchr(char const *str, int c);
