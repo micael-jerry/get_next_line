@@ -6,7 +6,7 @@
 /*   By: mfidimal <mfidimal@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 19:12:22 by mfidimal          #+#    #+#             */
-/*   Updated: 2024/04/10 11:06:25 by mfidimal         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:20:40 by mfidimal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,21 @@ static char	*get_line(char *global_tmp)
 	return (line);
 }
 
-static char *get_global_tmp(char *global_tmp)
+static char	*get_global_tmp(char *global_tmp)
 {
 	char	*new_global_tmp;
 	int		i;
 	int		j;
 
-	if (!global_tmp || !global_tmp[0])
-		return (NULL);
 	i = 0;
 	while (global_tmp[i] && global_tmp[i] != '\n')
 		i++;
-	if (global_tmp[i] == '\n')
-		i++;
-	else
-		return (NULL);
-	new_global_tmp = (char *)malloc(sizeof(char) * (ft_strlen(global_tmp) - i) + 1);
+	if (global_tmp[i] == '\0')
+		return (free(global_tmp), NULL);
+	new_global_tmp = (char *)malloc(sizeof(char) * (ft_strlen(global_tmp) - i + 1));
 	if (!new_global_tmp)
 		return (NULL);
+	i++;
 	j = 0;
 	while (global_tmp[i])
 	{
@@ -63,8 +60,7 @@ static char *get_global_tmp(char *global_tmp)
 		j++;
 	}
 	new_global_tmp[j] = '\0';
-	free(global_tmp);
-	return (new_global_tmp);
+	return (free(global_tmp), new_global_tmp);
 }
 
 char	*get_next_line(int fd)
@@ -84,17 +80,13 @@ char	*get_next_line(int fd)
 	{
 		bytes_readed = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_readed == -1)
-		{
-			free(buffer);
-			return (NULL);
-		}
+			return (free(buffer), NULL);
 		buffer[bytes_readed] = '\0';
 		global_tmp = strjoin_free(global_tmp, buffer);
 		if (ft_strchr(global_tmp, '\n'))
 			break ;
 	}
-	free(buffer);
 	line = get_line(global_tmp);
 	global_tmp = get_global_tmp(global_tmp);
-	return (line);
+	return (free(buffer), line);
 }
